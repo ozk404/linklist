@@ -6,20 +6,24 @@ export async function upload(ev, callbackFn) {
   if (file) {
 
     const uploadPromise = new Promise((resolve, reject) => {
-      const data = new FormData;
+      const data = new FormData();
       data.set('file', file);
+
       fetch('/api/upload', {
         method: 'POST',
         body: data,
       }).then(response => {
         if (response.ok) {
-          response.json().then(link => {
+          response.json().then(data => {
+            const link = data.url; // Acceder al campo 'url' en la respuesta
             callbackFn(link);
             resolve(link);
           });
         } else {
-          reject();
+          reject(new Error('Upload failed'));
         }
+      }).catch(error => {
+        reject(error);
       });
     });
 
@@ -28,6 +32,5 @@ export async function upload(ev, callbackFn) {
       success: 'Uploaded!',
       error: 'Upload error!',
     });
-
   }
 }

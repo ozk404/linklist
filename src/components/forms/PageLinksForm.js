@@ -1,29 +1,29 @@
 'use client';
-import {savePageLinks} from "@/actions/pageActions";
+import { savePageLinks } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
-import {upload} from "@/libs/upload";
-import {faCloudArrowUp, faGripLines, faLink, faPlus, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { upload } from "@/libs/upload";
+import { faCloudArrowUp, faGripLines, faLink, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import {useState} from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import {ReactSortable} from "react-sortablejs";
+import { ReactSortable } from "react-sortablejs";
 
-export default function PageLinksForm({page,user}) {
-  const [links,setLinks] = useState(page.links || []);
+export default function PageLinksForm({ page, user }) {
+  const [links, setLinks] = useState(page.links || []);
   async function save() {
     await savePageLinks(links);
-    toast.success('Saved!');
+    toast.success('¡Cambios guardados exitosamente!');
   }
   function addNewLink() {
     setLinks(prev => {
       return [...prev, {
         key: Date.now().toString(),
-        title:'',
-        subtitle:'',
-        icon:'',
-        url:'',
+        title: '',
+        subtitle: '',
+        icon: '',
+        url: '',
       }];
     });
   }
@@ -31,7 +31,7 @@ export default function PageLinksForm({page,user}) {
     upload(ev, uploadedImageUrl => {
       setLinks(prevLinks => {
         const newLinks = [...prevLinks];
-        newLinks.forEach((link,index) => {
+        newLinks.forEach((link, index) => {
           if (link.key === linkKeyForUpload) {
             link.icon = uploadedImageUrl;
           }
@@ -59,13 +59,20 @@ export default function PageLinksForm({page,user}) {
   return (
     <SectionBox>
       <form action={save}>
-        <h2 className="text-2xl font-bold mb-4">Links</h2>
+        <h2 className="text-2xl font-bold mb-4">URLs y Enlaces Externos</h2>
+
+        <p className="text-md mb-4">
+          Esta sección te permite agregar enlaces directos a sitios web importantes y recursos que quieras compartir con tus visitantes, puedes incluir enlaces a tu blog, portafolio, tienda en línea o cualquier otra página relevante.
+          <br /> <br /> Simplemente ingresa la URL deseada y una breve descripción para cada enlace. Esto hace que sea fácil para tus seguidores acceder a información adicional y explorar más sobre lo que ofreces, todo desde un solo lugar.
+        </p>
+        <hr/>
+        <br/>
         <button
           onClick={addNewLink}
           type="button"
           className="text-blue-500 text-lg flex gap-2 items-center cursor-pointer">
           <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-          <span>Add new</span>
+          <span>Agregar un nuevo enlace</span>
         </button>
         <div className="">
           <ReactSortable
@@ -93,47 +100,47 @@ export default function PageLinksForm({page,user}) {
                   </div>
                   <div>
                     <input
-                      onChange={ev => handleUpload(ev,l.key)}
-                      id={'icon'+l.key}
+                      onChange={ev => handleUpload(ev, l.key)}
+                      id={'icon' + l.key}
                       type="file"
-                      className="hidden"/>
-                    <label htmlFor={'icon'+l.key} className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center">
+                      className="hidden" />
+                    <label htmlFor={'icon' + l.key} className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center">
                       <FontAwesomeIcon icon={faCloudArrowUp} />
-                      <span>Change icon</span>
+                      <span>Cambiar Icono</span>
                     </label>
                     <button
                       onClick={() => removeLink(l.key)}
                       type="button" className="w-full bg-gray-300 py-2 px-3 mb-2 h-full flex gap-2 items-center justify-center">
                       <FontAwesomeIcon icon={faTrash} />
-                      <span>Remove this link</span>
+                      <span>Eliminar este enlace</span>
                     </button>
                   </div>
                 </div>
                 <div className="grow">
-                  <label className="input-label">Title:</label>
+                  <label className="input-label">Título:</label>
                   <input
                     value={l.title}
                     onChange={ev => handleLinkChange(l.key, 'title', ev)}
-                    type="text" placeholder="title"/>
-                  <label className="input-label">Subtitle:</label>
+                    type="text" placeholder="title" />
+                  <label className="input-label">Subtitulo:</label>
                   <input
                     value={l.subtitle}
                     onChange={ev => handleLinkChange(l.key, 'subtitle', ev)}
-                    type="text" placeholder="subtitle (optional)"/>
+                    type="text" placeholder="subtitle (optional)" />
                   <label className="input-label">URL:</label>
                   <input
                     value={l.url}
                     onChange={ev => handleLinkChange(l.key, 'url', ev)}
-                    type="text" placeholder="url"/>
+                    type="text" placeholder="url" />
                 </div>
               </div>
             ))}
           </ReactSortable>
         </div>
         <div className="border-t pt-4 mt-4">
-          <SubmitButton className="max-w-xs mx-auto">
+          <SubmitButton className=" mx-auto">
             <FontAwesomeIcon icon={faSave} />
-            <span>Save</span>
+            <span className="mx-2"> Guardar Cambios</span>
           </SubmitButton>
         </div>
       </form>

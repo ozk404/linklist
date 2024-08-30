@@ -33,9 +33,9 @@ export default function HeroForm({user}) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="inline-flex items-center shadow-lg bg-white shadow-gray-500/20">
+      className="inline-flex content-center items-center shadow-lg bg-white shadow-gray-500/20">
           <span className="bg-white py-4 pl-4">
-            linklist.to/
+            globalshapers.org.gt/
           </span>
       <input
         type="text"
@@ -45,7 +45,7 @@ export default function HeroForm({user}) {
       <button
         type="submit"
         className="bg-blue-500 text-white py-4 px-6 whitespace-nowrap">
-        Join for Free
+        ¡Crear usuario!
       </button>
     </form>
   );

@@ -10,7 +10,7 @@ export async function savePageSettings(formData) {
   const session = await getServerSession(authOptions);
   if (session) {
     const dataKeys = [
-      'displayName','location',
+      'displayName','location', 'hub', 'position',
       'bio', 'bgType', 'bgColor', 'bgImage',
     ];
 

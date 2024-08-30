@@ -35,7 +35,7 @@ export default async function AppTemplate({ children, ...rest }) {
     <main className="md:flex min-h-screen">
       <label htmlFor="navCb" className="md:hidden ml-8 mt-4 p-4 rounded-md bg-white shadow inline-flex items-center gap-2 cursor-pointer">
         <FontAwesomeIcon icon={faBars} />
-        <span>Open navigation</span>
+        <span>Abrir Menú</span>
       </label>
       <input id="navCb" type="checkbox" className="hidden" />
       <label htmlFor="navCb" className="hidden backdrop fixed inset-0 bg-black/80 z-10"></label>

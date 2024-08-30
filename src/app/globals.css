@@ -37,3 +37,85 @@ input#navCb:checked ~ aside{
 input#navCb:checked ~ .backdrop{
     display: block;
 }
+
+
+
+.zoom-menos {
+    transition: 0.30s all ease-in-out;
+}
+
+.zoom-menos:hover {
+    transform: scale(0.905);
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.1);
+}
+
+.zoom-mas {
+    transition: 0.30s all ease-in-out;
+}
+
+.zoom-mas:hover {
+    transform: scale(1.09);
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.1);
+}
+
+
+@keyframes wipe-enter {
+	0% {
+        transform: rotate(180deg);
+
+       	}
+    25%{
+		transform: scale(.025, .025);
+
+    }
+	50% {
+		transform: scale(1, 1);
+	}
+    75%{
+        
+
+    }
+}
+
+@keyframes wipe-enter2 {
+	0% {
+		transform: scale(0.025, 1);
+       	}
+	50% {
+		transform: scale(1, 0.025);
+	}
+
+}
+
+@keyframes wipe-enterinf {
+    to { transform: scale(1.4); }
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .square {
+      animation-name: wipe-enter2;
+      animation-duration: 1s;
+      animation-iteration-count: initial;
+    }
+  }
+
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .square2 {
+    animation-name: wipe-enter;
+    animation-duration: 2.5s;
+    animation-iteration-count: initial;
+}
+
+
+}
+
+.square22 {
+    animation: beat 1s infinite alternate;
+}
+/* Heart beat animation */
+@keyframes beat{
+	to { transform: scale(0.97); }
+}

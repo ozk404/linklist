@@ -11,18 +11,37 @@ import cloneDeep from 'clone-deep';
 
 export default async function AccountPage({searchParams}) {
   const session = await getServerSession(authOptions);
+
   const desiredUsername = searchParams?.desiredUsername;
   if (!session) {
     return redirect('/');
   }
   mongoose.connect(process.env.MONGO_URI);
+  
   const page = await Page.findOne({owner: session?.user?.email});
+if (!page && !desiredUsername){
+  return redirect('/crearuser');
+}
+
+  if(!page){
+    await Page.create({
+      uri:desiredUsername,
+      owner:session?.user?.email
+  });
+  return redirect('/');
+
+  }
 
   const leanPage = cloneDeep(page.toJSON());
   leanPage._id = leanPage._id.toString();
   if (page) {
     return (
       <>
+            <div className="m-8 p-4 text-center">
+
+<h1 className="text-5xl font-bold mb-4">¡Bienvenido de nuevo {page.displayName.split(' ')[0]}!</h1>
+
+</div>
         <PageSettingsForm page={leanPage} user={session.user} />
         <PageButtonsForm page={leanPage} user={session.user} />
         <PageLinksForm page={leanPage} user={session.user} />

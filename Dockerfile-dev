@@ -1,0 +1,25 @@
+# Establece la imagen base
+FROM node:18-alpine
+
+# Establece el directorio de trabajo en el contenedor
+WORKDIR /app
+
+# Instala `nodemon` globalmente
+RUN yarn global add nodemon
+
+# Copia el archivo package.json y yarn.lock
+COPY package.json yarn.lock ./
+
+# Instala las dependencias
+RUN yarn install --frozen-lockfile
+
+# Copia el resto de la aplicación
+COPY . .
+COPY server.crt /app/server.crt
+COPY server.key /app/server.key
+
+# Expone el puerto 3000 para la aplicación
+EXPOSE 3000
+
+# Comando para iniciar la aplicación en desarrollo con `nodemon`
+CMD ["node", "server.js"]

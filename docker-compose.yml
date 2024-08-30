@@ -1,0 +1,22 @@
+
+services:
+  nextjs:
+    build: .
+    ports:
+      - '3007:3007'
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydatabase
+      - NODE_ENV=production
+      - NEXTAUTH_SECRET=b7f8f9527245cf3480927c7ed5ca230c48753119d022ce690c73c9380f0f740f  # Añadir el secreto generado aquí
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6.0
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

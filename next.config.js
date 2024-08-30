@@ -6,7 +6,10 @@ const nextConfig = {
         hostname: '*.googleusercontent.com'
       },
       {
-        hostname: 'linklist-files.s3.amazonaws.com',
+        hostname: 'storage.googleapis.com',
+      },
+      {
+        hostname: 'tecsify.com',
       },
     ],
   }

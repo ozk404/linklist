@@ -1,7 +1,7 @@
 'use client';
 import LogoutButton from "@/components/buttons/LogoutButton";
 import {faFileLines} from "@fortawesome/free-regular-svg-icons";
-import {faArrowLeft, faChartLine} from "@fortawesome/free-solid-svg-icons";
+import {faArrowLeft, faCalendar, faChartLine, faNewspaper} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
@@ -9,7 +9,7 @@ import {usePathname} from "next/navigation";
 export default function AppSidebar() {
   const path = usePathname();
   return (
-    <nav className="inline-flex mx-auto flex-col text-center mt-8 gap-2 text-gray-500">
+    <nav className="inline-flex text-md mx-auto flex-col text-center mt-8 gap-2 text-gray-500">
       <Link
         href={'/account'}
         className={
@@ -21,7 +21,7 @@ export default function AppSidebar() {
           icon={faFileLines}
           className={'w-6 h-6'}
         />
-        <span className="">My Page</span>
+        <span className="">Editar mi Perfil</span>
       </Link>
       <Link
         href={'/analytics'}
@@ -34,7 +34,33 @@ export default function AppSidebar() {
           icon={faChartLine}
           className={'w-6 h-6'}
         />
-        <span className="">Analytics</span>
+        <span className="">Mis Analytics</span>
+      </Link>
+      <Link
+        href={'/'}
+        className={
+          "flex gap-4 p-2 "
+          + (path === '/' ? 'text-blue-500' : '')
+        }>
+        <FontAwesomeIcon
+          fixedWidth={true}
+          icon={faCalendar}
+          className={'w-6 h-6'}
+        />
+        <span className="">Eventos</span>
+      </Link>
+      <Link
+        href={'/'}
+        className={
+          "flex gap-4 p-2 "
+          + (path === '/' ? 'text-blue-500' : '')
+        }>
+        <FontAwesomeIcon
+          fixedWidth={true}
+          icon={faNewspaper}
+          className={'w-6 h-6'}
+        />
+        <span className="">Noticias</span>
       </Link>
       <LogoutButton
         iconLeft={true}

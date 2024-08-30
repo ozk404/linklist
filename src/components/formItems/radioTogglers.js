@@ -5,8 +5,9 @@ export default function RadioTogglers({options,defaultValue,onChange}) {
   return (
     <div className="radio-togglers shadow">
       {options.map(option => (
-        <label key={option.value}>
+        <label key={option.value} className="mx-4">
           <input
+          className=""
             type="radio"
             name="bgType"
             onClick={ev => onChange(ev.target.value)}
